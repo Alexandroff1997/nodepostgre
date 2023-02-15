@@ -30,6 +30,7 @@ class User {
 	async deleteUser(req, res) {
 		const id = req.params.id;
 		console.log(id);
+		await db.query(`ALTER TABLE person DISABLE TRIGGER ALL`);
 		const user = await db.query(`DELETE FROM person WHERE id = $1 `, [id]);
 		res.json(user.rows[0]);
 	}
